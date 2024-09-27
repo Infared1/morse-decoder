@@ -38,7 +38,19 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    const morseLetters = expr.match(/.{1,10}/g);
+    let decodedMessage = '';
+
+    morseLetters.forEach(letter => {
+        if (letter === '**********') {
+            decodedMessage += ' '; 
+        } else {
+            const morseCode = letter.replace(/10/g, '.').replace(/11/g, '-').replace(/0/g, ''); 
+            decodedMessage += MORSE_TABLE[morseCode] || ''; 
+        }
+    });
+
+    return decodedMessage;
 }
 
 module.exports = {
